@@ -73,12 +73,19 @@
       background:var(--bg);
       color:var(--text);
       line-height:1.5;
+      overflow:hidden;
     }
     img{display:block;max-width:100%}
     a{color:inherit}
     button{font:inherit}
+    .app-shell{
+      height:100vh;
+      display:grid;
+      grid-template-rows:auto auto minmax(0,1fr);
+    }
     .wrap{
       max-width:1400px;
+      width:100%;
       margin:0 auto;
       padding:20px;
     }
@@ -124,6 +131,16 @@
       cursor:pointer;
     }
 
+    .news-zone{
+      min-height:0;
+      display:grid;
+      grid-template-rows:auto minmax(0,1fr);
+      max-width:1400px;
+      width:100%;
+      margin:0 auto;
+      padding:0 20px;
+    }
+
     .columns-header{
       display:grid;
       grid-template-columns:minmax(0,1fr) minmax(0,1fr);
@@ -167,8 +184,10 @@
       display:grid;
       grid-template-columns:minmax(0,1fr) minmax(0,1fr);
       border:1px solid var(--border);
-      min-height:70vh;
+      min-height:0;
+      height:100%;
       position:relative;
+      overflow:hidden;
     }
     .main-split::before{
       content:"";
@@ -182,7 +201,13 @@
     }
     .news-col{
       min-width:0;
+      min-height:0;
+      height:100%;
+      overflow-y:auto;
+      overflow-x:hidden;
       padding:14px;
+      overscroll-behavior:contain;
+      -webkit-overflow-scrolling:touch;
     }
     .left-col{border-right:1px solid var(--border)}
     .topic-filters{
@@ -253,9 +278,7 @@
       line-height:1.25;
       margin-bottom:8px;
     }
-    .headline a{
-      text-decoration:none;
-    }
+    .headline a{text-decoration:none}
     .headline a:hover{text-decoration:underline}
     .snippet{
       font-size:.86rem;
@@ -267,7 +290,9 @@
     }
 
     .stocks-section{
-      margin-top:24px;
+      max-width:1400px;
+      margin:24px auto 0;
+      padding:0 20px 24px;
     }
     .stocks-header{
       margin-bottom:14px;
@@ -327,9 +352,7 @@
       color:var(--muted);
       background:var(--surface2);
     }
-    tr:hover td{
-      background:rgba(255,255,255,.02);
-    }
+    tr:hover td{background:rgba(255,255,255,.02)}
     .buy{color:var(--green);font-weight:700}
     .sell{color:var(--red);font-weight:700}
     .change-up{color:var(--green);font-weight:700}
@@ -338,26 +361,26 @@
       color:var(--muted);
       padding:14px;
     }
-
     .footer-note{
       color:var(--faint);
       font-size:.78rem;
       margin-top:16px;
     }
 
-    /* Mobile: keep side by side, but compact */
     @media (max-width:768px){
+      body{overflow:auto}
+      .app-shell{height:auto;display:block}
       .wrap{padding:10px}
+      .news-zone{
+        padding:0 10px;
+        display:block;
+      }
       .site-header{
         grid-template-columns:1fr auto;
         align-items:start;
       }
-      .brand h1{
-        font-size:clamp(1.7rem,6vw,2.4rem);
-      }
-      .brand p{
-        font-size:.82rem;
-      }
+      .brand h1{font-size:clamp(1.7rem,6vw,2.4rem)}
+      .brand p{font-size:.82rem}
       .chip-btn{
         min-height:38px;
         padding:8px 10px;
@@ -376,8 +399,13 @@
       }
       .main-split{
         grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+        height:auto;
+        min-height:auto;
+        overflow:visible;
       }
       .news-col{
+        height:auto;
+        overflow:visible;
         padding:10px;
       }
       .topic-btn{
@@ -385,24 +413,12 @@
         padding:6px 10px;
         font-size:.72rem;
       }
-      .section-label{
-        font-size:.66rem;
-      }
-      .headline{
-        font-size:.82rem;
-      }
-      .snippet{
-        font-size:.72rem;
-      }
-      .meta{
-        font-size:.64rem;
-      }
-      .card-body{
-        padding:10px;
-      }
-      .news-card img{
-        aspect-ratio:4/3;
-      }
+      .section-label{font-size:.66rem}
+      .headline{font-size:.82rem}
+      .snippet{font-size:.72rem}
+      .meta{font-size:.64rem}
+      .card-body{padding:10px}
+      .news-card img{aspect-ratio:4/3}
 
       .stocks-grid{
         grid-template-columns:minmax(0,1fr) minmax(0,1fr);
@@ -412,38 +428,27 @@
         padding:10px 8px;
         font-size:.72rem;
       }
-      th{
-        font-size:.62rem;
-      }
+      th{font-size:.62rem}
       .panel-head{
         padding:10px;
         font-size:.68rem;
       }
+      .stocks-section{
+        padding:0 10px 20px;
+      }
     }
 
     @media (max-width:420px){
-      .site-header{
-        grid-template-columns:1fr;
-      }
-      .header-actions{
-        justify-content:flex-start;
-      }
-      .headline{
-        font-size:.76rem;
-      }
-      .snippet{
-        font-size:.68rem;
-      }
+      .site-header{grid-template-columns:1fr}
+      .header-actions{justify-content:flex-start}
+      .headline{font-size:.76rem}
+      .snippet{font-size:.68rem}
       .topic-btn{
         font-size:.68rem;
         padding:5px 8px;
       }
-      .col-head{
-        padding:8px;
-      }
-      .news-col{
-        padding:8px;
-      }
+      .col-head{padding:8px}
+      .news-col{padding:8px}
       th,td{
         font-size:.66rem;
         padding:8px 6px;
@@ -452,72 +457,76 @@
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="site-header">
-      <div class="brand">
-        <h1>THE DIVIDE</h1>
-        <p>Dual-perspective news that places left-leaning and right-leaning coverage side by side, with a live stock watch section below.</p>
-      </div>
-      <div class="header-actions">
-        <button class="chip-btn" id="refreshBtn">Refresh</button>
-        <button class="chip-btn" id="themeToggle">Toggle Theme</button>
-      </div>
-    </header>
-
-    <div class="columns-header">
-      <div class="col-head left">
-        <div>🔵 Left-Leaning</div>
-        <div class="col-sources">
-          <span class="source-chip">Guardian</span>
-          <span class="source-chip">NPR</span>
-          <span class="source-chip">CNN</span>
-          <span class="source-chip">Vox</span>
+  <div class="app-shell">
+    <div class="wrap">
+      <header class="site-header">
+        <div class="brand">
+          <h1>THE DIVIDE</h1>
+          <p>Dual-perspective news that places left-leaning and right-leaning coverage side by side, with a live stock watch section below.</p>
         </div>
-      </div>
-      <div class="col-head right">
-        <div>🔴 Right-Leaning</div>
-        <div class="col-sources">
-          <span class="source-chip">Fox News</span>
-          <span class="source-chip">Breitbart</span>
-          <span class="source-chip">NY Post</span>
-          <span class="source-chip">Daily Wire</span>
+        <div class="header-actions">
+          <button class="chip-btn" id="refreshBtn">Refresh</button>
+          <button class="chip-btn" id="themeToggle">Toggle Theme</button>
         </div>
-      </div>
+      </header>
     </div>
 
-    <main class="main-split">
-      <section class="news-col left-col">
-        <div class="topic-filters" id="leftFilters">
-          <button class="topic-btn active left-active" onclick="filterCol('left','all',this)">All</button>
-          <button class="topic-btn" onclick="filterCol('left','politics',this)">Politics</button>
-          <button class="topic-btn" onclick="filterCol('left','economy',this)">Economy</button>
-          <button class="topic-btn" onclick="filterCol('left','world',this)">World</button>
+    <section class="news-zone">
+      <div class="columns-header">
+        <div class="col-head left">
+          <div>🔵 Left-Leaning</div>
+          <div class="col-sources">
+            <span class="source-chip">Guardian</span>
+            <span class="source-chip">NPR</span>
+            <span class="source-chip">CNN</span>
+            <span class="source-chip">Vox</span>
+          </div>
         </div>
-        <div class="section-label">Progressive Perspective</div>
-        <div id="leftFeed"><div class="loading">Loading left-leaning news…</div></div>
-      </section>
+        <div class="col-head right">
+          <div>🔴 Right-Leaning</div>
+          <div class="col-sources">
+            <span class="source-chip">Fox News</span>
+            <span class="source-chip">Breitbart</span>
+            <span class="source-chip">NY Post</span>
+            <span class="source-chip">Daily Wire</span>
+          </div>
+        </div>
+      </div>
 
-      <section class="news-col right-col">
-        <div class="topic-filters" id="rightFilters">
-          <button class="topic-btn active right-active" onclick="filterCol('right','all',this)">All</button>
-          <button class="topic-btn" onclick="filterCol('right','politics',this)">Politics</button>
-          <button class="topic-btn" onclick="filterCol('right','economy',this)">Economy</button>
-          <button class="topic-btn" onclick="filterCol('right','world',this)">World</button>
-        </div>
-        <div class="section-label">Conservative Perspective</div>
-        <div id="rightFeed"><div class="loading">Loading right-leaning news…</div></div>
-      </section>
-    </main>
+      <main class="main-split">
+        <section class="news-col left-col">
+          <div class="topic-filters" id="leftFilters">
+            <button class="topic-btn active left-active" onclick="filterCol('left','all',this)">All</button>
+            <button class="topic-btn" onclick="filterCol('left','politics',this)">Politics</button>
+            <button class="topic-btn" onclick="filterCol('left','economy',this)">Economy</button>
+            <button class="topic-btn" onclick="filterCol('left','world',this)">World</button>
+          </div>
+          <div class="section-label">Progressive Perspective</div>
+          <div id="leftFeed"><div class="loading">Loading left-leaning news…</div></div>
+        </section>
+
+        <section class="news-col right-col">
+          <div class="topic-filters" id="rightFilters">
+            <button class="topic-btn active right-active" onclick="filterCol('right','all',this)">All</button>
+            <button class="topic-btn" onclick="filterCol('right','politics',this)">Politics</button>
+            <button class="topic-btn" onclick="filterCol('right','economy',this)">Economy</button>
+            <button class="topic-btn" onclick="filterCol('right','world',this)">World</button>
+          </div>
+          <div class="section-label">Conservative Perspective</div>
+          <div id="rightFeed"><div class="loading">Loading right-leaning news…</div></div>
+        </section>
+      </main>
+    </section>
 
     <section class="stocks-section">
       <div class="stocks-header">
         <h2>Stocks Section</h2>
-        <p>Live stock quotes with a green “more positive” list and a red “less favored” list.</p>
+        <p>Live stock quotes with 10 green “more positive” stocks and 10 red “less favored” stocks.</p>
       </div>
 
       <div class="stocks-grid">
         <div class="stocks-panel buy-panel">
-          <div class="panel-head">5 Stocks to Watch</div>
+          <div class="panel-head">10 Stocks to Watch</div>
           <div class="table-wrap">
             <table id="buy-stocks">
               <thead>
@@ -536,7 +545,7 @@
         </div>
 
         <div class="stocks-panel sell-panel">
-          <div class="panel-head">5 Not Recommended</div>
+          <div class="panel-head">10 Not Recommended</div>
           <div class="table-wrap">
             <table id="sell-stocks">
               <thead>
@@ -556,7 +565,7 @@
       </div>
 
       <div class="footer-note">
-        Live quotes depend on your Finnhub key, and public RSS-to-JSON feed delivery may vary by source and proxy uptime.
+        Live quotes depend on Finnhub rate limits. With 20 symbols total, occasional throttling is possible on the free tier.
       </div>
     </section>
   </div>
@@ -569,7 +578,12 @@
       {symbol:'MSFT', name:'Microsoft'},
       {symbol:'GOOGL', name:'Alphabet'},
       {symbol:'AMZN', name:'Amazon'},
-      {symbol:'NVDA', name:'NVIDIA'}
+      {symbol:'NVDA', name:'NVIDIA'},
+      {symbol:'META', name:'Meta'},
+      {symbol:'AVGO', name:'Broadcom'},
+      {symbol:'JPM', name:'JPMorgan'},
+      {symbol:'COST', name:'Costco'},
+      {symbol:'LLY', name:'Eli Lilly'}
     ];
 
     const sellStocks = [
@@ -577,7 +591,12 @@
       {symbol:'NFLX', name:'Netflix'},
       {symbol:'ZM', name:'Zoom'},
       {symbol:'CRM', name:'Salesforce'},
-      {symbol:'AMD', name:'AMD'}
+      {symbol:'AMD', name:'AMD'},
+      {symbol:'DJT', name:'Trump Media'},
+      {symbol:'BYND', name:'Beyond Meat'},
+      {symbol:'LCID', name:'Lucid'},
+      {symbol:'NKLA', name:'Nikola'},
+      {symbol:'GME', name:'GameStop'}
     ];
 
     const RSS2JSON = 'https://api.rss2json.com/v1/api.json?rss_url=';
@@ -586,7 +605,7 @@
       left: [
         { name:'The Guardian', url:'https://www.theguardian.com/world/rss' },
         { name:'NPR', url:'https://feeds.npr.org/1001/rss.xml' },
-        { name:'CNN', url:'http://rss.cnn.com/rss/cnn_topstories.rss' },
+        { name:'CNN', url:'https://rss.cnn.com/rss/cnn_topstories.rss' },
         { name:'Vox', url:'https://www.vox.com/rss/index.xml' }
       ],
       right: [
@@ -639,9 +658,10 @@
         return;
       }
 
-      target.innerHTML = filtered.slice(0, 10).map(item => {
+      target.innerHTML = filtered.slice(0, 12).map(item => {
         const img = item.enclosure?.link || item.thumbnail || '';
-        const snippet = stripHtml(item.description).slice(0, 120);
+        const rawSnippet = stripHtml(item.description).slice(0, 120);
+        const snippet = rawSnippet ? rawSnippet + '...' : '';
         return `
           <article class="news-card">
             ${img ? `<img src="${img}" alt="${item.title || ''}" loading="lazy" onerror="this.style.display='none'">` : ''}
@@ -653,7 +673,7 @@
               <h3 class="headline">
                 <a href="${item.link || '#'}" target="_blank" rel="noopener noreferrer">${item.title || 'Untitled'}</a>
               </h3>
-              <p class="snippet">${snippet}...</p>
+              <p class="snippet">${snippet}</p>
             </div>
           </article>
         `;
@@ -691,34 +711,45 @@
       renderNews(side, allArticles[side]);
     }
 
-    function fetchStockData(stocks, isBuy) {
-      const tbody = isBuy
-        ? $('#buy-stocks tbody')
-        : $('#sell-stocks tbody');
+    async function fetchOneStock(stock) {
+      try {
+        const res = await fetch(`https://finnhub.io/api/v1/quote?symbol=${stock.symbol}&token=${API_KEY}`);
+        if (!res.ok) throw new Error('HTTP error');
+        const data = await res.json();
+        return {
+          ...stock,
+          price: typeof data.c === 'number' ? data.c : null,
+          changePct: typeof data.dp === 'number' ? data.dp : null
+        };
+      } catch (e) {
+        return {
+          ...stock,
+          price: null,
+          changePct: null
+        };
+      }
+    }
 
-      tbody.empty();
+    async function fetchStockData(stocks, isBuy) {
+      const tbody = isBuy ? document.querySelector('#buy-stocks tbody') : document.querySelector('#sell-stocks tbody');
+      tbody.innerHTML = `<tr><td colspan="4" class="loading">Loading ${isBuy ? 'buy' : 'sell'} stocks…</td></tr>`;
 
-      stocks.forEach(stock => {
-        $.get(`https://finnhub.io/api/v1/quote?symbol=${stock.symbol}&token=${API_KEY}`, function(data) {
-          const price = typeof data.c === 'number' ? '$' + data.c.toFixed(2) : 'N/A';
-          const changePct = typeof data.dp === 'number' ? data.dp : null;
-          const changeText = changePct === null ? 'N/A' : `${changePct > 0 ? '+' : ''}${changePct.toFixed(2)}%`;
+      const results = await Promise.all(stocks.map(fetchOneStock));
 
-          $('<tr>').append(
-            $('<td>').text(stock.symbol),
-            $('<td>').text(stock.name),
-            $('<td>').text(price).addClass(isBuy ? 'buy' : 'sell'),
-            $('<td>').text(changeText).addClass(changePct !== null && changePct >= 0 ? 'change-up' : 'change-down')
-          ).appendTo(tbody);
-        }).fail(function() {
-          $('<tr>').append(
-            $('<td>').text(stock.symbol),
-            $('<td>').text(stock.name),
-            $('<td>').text('N/A').addClass(isBuy ? 'buy' : 'sell'),
-            $('<td>').text('N/A')
-          ).appendTo(tbody);
-        });
-      });
+      tbody.innerHTML = results.map(stock => {
+        const priceText = stock.price !== null ? '$' + stock.price.toFixed(2) : 'N/A';
+        const changeText = stock.changePct !== null ? `${stock.changePct > 0 ? '+' : ''}${stock.changePct.toFixed(2)}%` : 'N/A';
+        const changeClass = stock.changePct === null ? '' : (stock.changePct >= 0 ? 'change-up' : 'change-down');
+
+        return `
+          <tr>
+            <td>${stock.symbol}</td>
+            <td>${stock.name}</td>
+            <td class="${isBuy ? 'buy' : 'sell'}">${priceText}</td>
+            <td class="${changeClass}">${changeText}</td>
+          </tr>
+        `;
+      }).join('');
     }
 
     document.getElementById('themeToggle').addEventListener('click', () => {
@@ -732,7 +763,7 @@
       fetchStockData(sellStocks, false);
     });
 
-    $(document).ready(function() {
+    document.addEventListener('DOMContentLoaded', () => {
       loadNews();
       fetchStockData(buyStocks, true);
       fetchStockData(sellStocks, false);
