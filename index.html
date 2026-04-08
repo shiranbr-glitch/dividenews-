@@ -18,29 +18,14 @@
       --text:#e8e8ea;
       --muted:#8a8a90;
       --faint:#5b5b62;
-
       --left:#4080e8;
       --leftDim:#0f1e3d;
       --right:#e84040;
       --rightDim:#3d1515;
-
       --green:#2ecb70;
       --greenBg:#10281a;
       --red:#ef5252;
       --redBg:#311616;
-
-      --space-1:.25rem;
-      --space-2:.5rem;
-      --space-3:.75rem;
-      --space-4:1rem;
-      --space-5:1.25rem;
-      --space-6:1.5rem;
-      --space-8:2rem;
-
-      --radius-sm:.55rem;
-      --radius-md:.9rem;
-      --radius-lg:1.1rem;
-
       --font-display:'Playfair Display', serif;
       --font-body:'Inter', sans-serif;
     }
@@ -54,12 +39,10 @@
       --text:#17181c;
       --muted:#5e6270;
       --faint:#9094a2;
-
       --left:#1d5ed8;
       --leftDim:#e3edff;
       --right:#c62828;
       --rightDim:#ffe7e7;
-
       --green:#108a43;
       --greenBg:#e4f7eb;
       --red:#cf2d2d;
@@ -67,22 +50,24 @@
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
-    html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+    html,body{
+      height:100%;
+      -webkit-font-smoothing:antialiased;
+      scroll-behavior:smooth;
+    }
+
     body{
       font-family:var(--font-body);
       background:var(--bg);
       color:var(--text);
       line-height:1.5;
-      overflow:hidden;
+      overflow:auto;
     }
+
     img{display:block;max-width:100%}
     a{color:inherit}
     button{font:inherit}
-    .app-shell{
-      height:100vh;
-      display:grid;
-      grid-template-rows:auto auto minmax(0,1fr);
-    }
+
     .wrap{
       max-width:1400px;
       width:100%;
@@ -99,6 +84,7 @@
       border-bottom:1px solid var(--border);
       margin-bottom:18px;
     }
+
     .brand h1{
       font-family:var(--font-display);
       font-size:clamp(2.2rem,4vw,4rem);
@@ -109,18 +95,21 @@
       -webkit-text-fill-color:transparent;
       background-clip:text;
     }
+
     .brand p{
       margin-top:8px;
       color:var(--muted);
       font-size:.98rem;
       max-width:70ch;
     }
+
     .header-actions{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
       justify-content:flex-end;
     }
+
     .chip-btn{
       min-height:42px;
       padding:10px 14px;
@@ -131,10 +120,7 @@
       cursor:pointer;
     }
 
-    .news-zone{
-      min-height:0;
-      display:grid;
-      grid-template-rows:auto minmax(0,1fr);
+    .news-shell{
       max-width:1400px;
       width:100%;
       margin:0 auto;
@@ -147,6 +133,7 @@
       border:1px solid var(--border);
       border-bottom:none;
     }
+
     .col-head{
       padding:14px 16px;
       min-width:0;
@@ -158,20 +145,24 @@
       text-transform:uppercase;
       letter-spacing:.1em;
     }
+
     .col-head.left{
       background:var(--leftDim);
       color:var(--left);
       border-right:1px solid var(--border);
     }
+
     .col-head.right{
       background:var(--rightDim);
       color:var(--right);
     }
+
     .col-sources{
       display:flex;
       gap:6px;
       flex-wrap:wrap;
     }
+
     .source-chip{
       border:1px solid currentColor;
       border-radius:999px;
@@ -184,11 +175,13 @@
       display:grid;
       grid-template-columns:minmax(0,1fr) minmax(0,1fr);
       border:1px solid var(--border);
-      min-height:0;
-      height:100%;
       position:relative;
+      height:calc(100vh - 210px);
+      min-height:520px;
+      max-height:760px;
       overflow:hidden;
     }
+
     .main-split::before{
       content:"";
       position:absolute;
@@ -198,7 +191,9 @@
       width:1px;
       background:linear-gradient(to bottom,var(--left),var(--border),var(--right));
       pointer-events:none;
+      z-index:2;
     }
+
     .news-col{
       min-width:0;
       min-height:0;
@@ -209,7 +204,11 @@
       overscroll-behavior:contain;
       -webkit-overflow-scrolling:touch;
     }
-    .left-col{border-right:1px solid var(--border)}
+
+    .left-col{
+      border-right:1px solid var(--border);
+    }
+
     .topic-filters{
       display:flex;
       gap:8px;
@@ -218,7 +217,11 @@
       margin-bottom:12px;
       scrollbar-width:none;
     }
-    .topic-filters::-webkit-scrollbar{display:none}
+
+    .topic-filters::-webkit-scrollbar{
+      display:none;
+    }
+
     .topic-btn{
       white-space:nowrap;
       min-height:38px;
@@ -229,11 +232,13 @@
       color:var(--text);
       cursor:pointer;
     }
+
     .topic-btn.active.left-active{
       color:var(--left);
       border-color:var(--left);
       background:var(--leftDim);
     }
+
     .topic-btn.active.right-active{
       color:var(--right);
       border-color:var(--right);
@@ -258,13 +263,18 @@
       overflow:hidden;
       margin-bottom:12px;
     }
+
     .news-card img{
       width:100%;
       aspect-ratio:16/9;
       object-fit:cover;
       background:var(--surface2);
     }
-    .card-body{padding:12px}
+
+    .card-body{
+      padding:12px;
+    }
+
     .meta{
       display:flex;
       flex-wrap:wrap;
@@ -273,13 +283,21 @@
       color:var(--muted);
       margin-bottom:8px;
     }
+
     .headline{
       font-size:1rem;
       line-height:1.25;
       margin-bottom:8px;
     }
-    .headline a{text-decoration:none}
-    .headline a:hover{text-decoration:underline}
+
+    .headline a{
+      text-decoration:none;
+    }
+
+    .headline a:hover{
+      text-decoration:underline;
+    }
+
     .snippet{
       font-size:.86rem;
       color:var(--muted);
@@ -294,39 +312,47 @@
       margin:24px auto 0;
       padding:0 20px 24px;
     }
+
     .stocks-header{
       margin-bottom:14px;
     }
+
     .stocks-header h2{
       font-family:var(--font-display);
       font-size:clamp(1.8rem,3vw,2.8rem);
       line-height:1.05;
       letter-spacing:-.03em;
     }
+
     .stocks-header p{
       margin-top:8px;
       color:var(--muted);
       max-width:68ch;
     }
+
     .stocks-grid{
       display:grid;
       grid-template-columns:minmax(0,1fr) minmax(0,1fr);
       gap:16px;
     }
+
     .stocks-panel{
       background:var(--surface);
       border:1px solid var(--border);
       border-radius:18px;
       overflow:hidden;
     }
+
     .stocks-panel.buy-panel .panel-head{
       background:var(--greenBg);
       color:var(--green);
     }
+
     .stocks-panel.sell-panel .panel-head{
       background:var(--redBg);
       color:var(--red);
     }
+
     .panel-head{
       padding:14px 16px;
       font-size:.8rem;
@@ -334,17 +360,23 @@
       text-transform:uppercase;
       letter-spacing:.1em;
     }
-    .table-wrap{overflow-x:auto}
+
+    .table-wrap{
+      overflow-x:auto;
+    }
+
     table{
       width:100%;
       border-collapse:collapse;
     }
+
     th,td{
       padding:12px 14px;
       text-align:left;
       border-bottom:1px solid var(--border);
       font-size:.9rem;
     }
+
     th{
       font-size:.74rem;
       text-transform:uppercase;
@@ -352,15 +384,17 @@
       color:var(--muted);
       background:var(--surface2);
     }
-    tr:hover td{background:rgba(255,255,255,.02)}
+
+    tr:hover td{
+      background:rgba(255,255,255,.02);
+    }
+
     .buy{color:var(--green);font-weight:700}
     .sell{color:var(--red);font-weight:700}
     .change-up{color:var(--green);font-weight:700}
     .change-down{color:var(--red);font-weight:700}
-    .loading{
-      color:var(--muted);
-      padding:14px;
-    }
+    .loading{color:var(--muted);padding:14px}
+
     .footer-note{
       color:var(--faint);
       font-size:.78rem;
@@ -368,87 +402,134 @@
     }
 
     @media (max-width:768px){
-      body{overflow:auto}
-      .app-shell{height:auto;display:block}
-      .wrap{padding:10px}
-      .news-zone{
-        padding:0 10px;
-        display:block;
+      .wrap,.news-shell,.stocks-section{
+        padding-left:10px;
+        padding-right:10px;
       }
+
       .site-header{
         grid-template-columns:1fr auto;
         align-items:start;
       }
-      .brand h1{font-size:clamp(1.7rem,6vw,2.4rem)}
-      .brand p{font-size:.82rem}
+
+      .brand h1{
+        font-size:clamp(1.7rem,6vw,2.4rem);
+      }
+
+      .brand p{
+        font-size:.82rem;
+      }
+
       .chip-btn{
         min-height:38px;
         padding:8px 10px;
         font-size:.8rem;
       }
-      .columns-header{
+
+      .columns-header,
+      .main-split,
+      .stocks-grid{
         grid-template-columns:minmax(0,1fr) minmax(0,1fr);
       }
+
+      .main-split{
+        height:auto;
+        min-height:auto;
+        max-height:none;
+        overflow:visible;
+      }
+
+      .main-split::before{
+        display:block;
+      }
+
       .col-head{
         padding:10px;
         font-size:.66rem;
       }
+
       .source-chip{
         font-size:.62rem;
         padding:2px 6px;
       }
-      .main-split{
-        grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-        height:auto;
-        min-height:auto;
-        overflow:visible;
-      }
+
       .news-col{
         height:auto;
         overflow:visible;
         padding:10px;
       }
+
       .topic-btn{
         min-height:34px;
         padding:6px 10px;
         font-size:.72rem;
       }
-      .section-label{font-size:.66rem}
-      .headline{font-size:.82rem}
-      .snippet{font-size:.72rem}
-      .meta{font-size:.64rem}
-      .card-body{padding:10px}
-      .news-card img{aspect-ratio:4/3}
 
-      .stocks-grid{
-        grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-        gap:10px;
+      .section-label{
+        font-size:.66rem;
       }
+
+      .headline{
+        font-size:.82rem;
+      }
+
+      .snippet{
+        font-size:.72rem;
+      }
+
+      .meta{
+        font-size:.64rem;
+      }
+
+      .card-body{
+        padding:10px;
+      }
+
+      .news-card img{
+        aspect-ratio:4/3;
+      }
+
       th,td{
         padding:10px 8px;
         font-size:.72rem;
       }
-      th{font-size:.62rem}
+
+      th{
+        font-size:.62rem;
+      }
+
       .panel-head{
         padding:10px;
         font-size:.68rem;
       }
-      .stocks-section{
-        padding:0 10px 20px;
-      }
     }
 
     @media (max-width:420px){
-      .site-header{grid-template-columns:1fr}
-      .header-actions{justify-content:flex-start}
-      .headline{font-size:.76rem}
-      .snippet{font-size:.68rem}
+      .site-header{
+        grid-template-columns:1fr;
+      }
+
+      .header-actions{
+        justify-content:flex-start;
+      }
+
+      .headline{
+        font-size:.76rem;
+      }
+
+      .snippet{
+        font-size:.68rem;
+      }
+
       .topic-btn{
         font-size:.68rem;
         padding:5px 8px;
       }
-      .col-head{padding:8px}
-      .news-col{padding:8px}
+
+      .col-head,.news-col{
+        padding:8px;
+      }
+
       th,td{
         font-size:.66rem;
         padding:8px 6px;
@@ -457,118 +538,116 @@
   </style>
 </head>
 <body>
-  <div class="app-shell">
-    <div class="wrap">
-      <header class="site-header">
-        <div class="brand">
-          <h1>THE DIVIDE</h1>
-          <p>Dual-perspective news that places left-leaning and right-leaning coverage side by side, with a live stock watch section below.</p>
+  <div class="wrap">
+    <header class="site-header">
+      <div class="brand">
+        <h1>THE DIVIDE</h1>
+        <p>Dual-perspective news that places left-leaning and right-leaning coverage side by side, with a live stock watch section below.</p>
+      </div>
+      <div class="header-actions">
+        <button class="chip-btn" id="refreshBtn">Refresh</button>
+        <button class="chip-btn" id="themeToggle">Toggle Theme</button>
+      </div>
+    </header>
+  </div>
+
+  <section class="news-shell">
+    <div class="columns-header">
+      <div class="col-head left">
+        <div>🔵 Left-Leaning</div>
+        <div class="col-sources">
+          <span class="source-chip">Guardian</span>
+          <span class="source-chip">NPR</span>
+          <span class="source-chip">CNN</span>
+          <span class="source-chip">Vox</span>
         </div>
-        <div class="header-actions">
-          <button class="chip-btn" id="refreshBtn">Refresh</button>
-          <button class="chip-btn" id="themeToggle">Toggle Theme</button>
+      </div>
+      <div class="col-head right">
+        <div>🔴 Right-Leaning</div>
+        <div class="col-sources">
+          <span class="source-chip">Fox News</span>
+          <span class="source-chip">Breitbart</span>
+          <span class="source-chip">NY Post</span>
+          <span class="source-chip">Daily Wire</span>
         </div>
-      </header>
+      </div>
     </div>
 
-    <section class="news-zone">
-      <div class="columns-header">
-        <div class="col-head left">
-          <div>🔵 Left-Leaning</div>
-          <div class="col-sources">
-            <span class="source-chip">Guardian</span>
-            <span class="source-chip">NPR</span>
-            <span class="source-chip">CNN</span>
-            <span class="source-chip">Vox</span>
-          </div>
+    <main class="main-split">
+      <section class="news-col left-col">
+        <div class="topic-filters" id="leftFilters">
+          <button class="topic-btn active left-active" onclick="filterCol('left','all',this)">All</button>
+          <button class="topic-btn" onclick="filterCol('left','politics',this)">Politics</button>
+          <button class="topic-btn" onclick="filterCol('left','economy',this)">Economy</button>
+          <button class="topic-btn" onclick="filterCol('left','world',this)">World</button>
         </div>
-        <div class="col-head right">
-          <div>🔴 Right-Leaning</div>
-          <div class="col-sources">
-            <span class="source-chip">Fox News</span>
-            <span class="source-chip">Breitbart</span>
-            <span class="source-chip">NY Post</span>
-            <span class="source-chip">Daily Wire</span>
-          </div>
+        <div class="section-label">Progressive Perspective</div>
+        <div id="leftFeed"><div class="loading">Loading left-leaning news…</div></div>
+      </section>
+
+      <section class="news-col right-col">
+        <div class="topic-filters" id="rightFilters">
+          <button class="topic-btn active right-active" onclick="filterCol('right','all',this)">All</button>
+          <button class="topic-btn" onclick="filterCol('right','politics',this)">Politics</button>
+          <button class="topic-btn" onclick="filterCol('right','economy',this)">Economy</button>
+          <button class="topic-btn" onclick="filterCol('right','world',this)">World</button>
         </div>
-      </div>
+        <div class="section-label">Conservative Perspective</div>
+        <div id="rightFeed"><div class="loading">Loading right-leaning news…</div></div>
+      </section>
+    </main>
+  </section>
 
-      <main class="main-split">
-        <section class="news-col left-col">
-          <div class="topic-filters" id="leftFilters">
-            <button class="topic-btn active left-active" onclick="filterCol('left','all',this)">All</button>
-            <button class="topic-btn" onclick="filterCol('left','politics',this)">Politics</button>
-            <button class="topic-btn" onclick="filterCol('left','economy',this)">Economy</button>
-            <button class="topic-btn" onclick="filterCol('left','world',this)">World</button>
-          </div>
-          <div class="section-label">Progressive Perspective</div>
-          <div id="leftFeed"><div class="loading">Loading left-leaning news…</div></div>
-        </section>
+  <section class="stocks-section">
+    <div class="stocks-header">
+      <h2>Stocks Section</h2>
+      <p>Live stock quotes with 10 green “more positive” stocks and 10 red “less favored” stocks.</p>
+    </div>
 
-        <section class="news-col right-col">
-          <div class="topic-filters" id="rightFilters">
-            <button class="topic-btn active right-active" onclick="filterCol('right','all',this)">All</button>
-            <button class="topic-btn" onclick="filterCol('right','politics',this)">Politics</button>
-            <button class="topic-btn" onclick="filterCol('right','economy',this)">Economy</button>
-            <button class="topic-btn" onclick="filterCol('right','world',this)">World</button>
-          </div>
-          <div class="section-label">Conservative Perspective</div>
-          <div id="rightFeed"><div class="loading">Loading right-leaning news…</div></div>
-        </section>
-      </main>
-    </section>
-
-    <section class="stocks-section">
-      <div class="stocks-header">
-        <h2>Stocks Section</h2>
-        <p>Live stock quotes with 10 green “more positive” stocks and 10 red “less favored” stocks.</p>
-      </div>
-
-      <div class="stocks-grid">
-        <div class="stocks-panel buy-panel">
-          <div class="panel-head">10 Stocks to Watch</div>
-          <div class="table-wrap">
-            <table id="buy-stocks">
-              <thead>
-                <tr>
-                  <th>Symbol</th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Daily %</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td colspan="4" class="loading">Loading buy stocks…</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="stocks-panel sell-panel">
-          <div class="panel-head">10 Not Recommended</div>
-          <div class="table-wrap">
-            <table id="sell-stocks">
-              <thead>
-                <tr>
-                  <th>Symbol</th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Daily %</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td colspan="4" class="loading">Loading sell stocks…</td></tr>
-              </tbody>
-            </table>
-          </div>
+    <div class="stocks-grid">
+      <div class="stocks-panel buy-panel">
+        <div class="panel-head">10 Stocks to Watch</div>
+        <div class="table-wrap">
+          <table id="buy-stocks">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Daily %</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="4" class="loading">Loading buy stocks…</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
-      <div class="footer-note">
-        Live quotes depend on Finnhub rate limits. With 20 symbols total, occasional throttling is possible on the free tier.
+      <div class="stocks-panel sell-panel">
+        <div class="panel-head">10 Not Recommended</div>
+        <div class="table-wrap">
+          <table id="sell-stocks">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Daily %</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="4" class="loading">Loading sell stocks…</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </section>
-  </div>
+    </div>
+
+    <div class="footer-note">
+      Live quotes depend on Finnhub rate limits. With 20 symbols total, occasional throttling is possible on the free tier.
+    </div>
+  </section>
 
   <script>
     const API_KEY = 'd7b2lb9r01qtpbhaa0j0d7b2lb9r01qtpbhaa0jg';
@@ -731,7 +810,10 @@
     }
 
     async function fetchStockData(stocks, isBuy) {
-      const tbody = isBuy ? document.querySelector('#buy-stocks tbody') : document.querySelector('#sell-stocks tbody');
+      const tbody = isBuy
+        ? document.querySelector('#buy-stocks tbody')
+        : document.querySelector('#sell-stocks tbody');
+
       tbody.innerHTML = `<tr><td colspan="4" class="loading">Loading ${isBuy ? 'buy' : 'sell'} stocks…</td></tr>`;
 
       const results = await Promise.all(stocks.map(fetchOneStock));
