@@ -358,43 +358,54 @@ ul{list-style:none}
 /* ── MOBILE ──────────────────────────────────────────────────── */
 @media(max-width:768px){
   html,body{overflow:auto}
-  body{font-size:16px}
+  body{font-size:15px}
   .site-header{position:sticky;top:0}
-  .header-inner{grid-template-columns:1fr auto;gap:var(--space-3);padding:var(--space-3) var(--space-4)}
+  .header-inner{grid-template-columns:1fr auto;gap:var(--space-3);padding:var(--space-3) var(--space-3)}
   .header-left{gap:var(--space-2);min-width:0;flex-wrap:wrap}
   .header-center{grid-column:1 / -1;order:-1;text-align:left}
   .header-right{display:flex;justify-content:flex-end;gap:var(--space-2)}
-  .logo-text{font-size:clamp(1.4rem,1.1rem + 2vw,2rem)}
-  .logo-sub{font-size:12px}
-  .live-badge,.refresh-btn,.theme-toggle{min-height:44px}
-  .refresh-btn{padding:0.7rem 0.9rem}
-  .theme-toggle{width:44px;height:44px}
-  .columns-header{grid-template-columns:1fr;position:static}
-  .col-head{padding:var(--space-3) var(--space-4);align-items:flex-start;flex-direction:column}
-  .col-head.right-head{border-right:none;border-bottom:1px solid var(--color-border)}
+  .logo-text{font-size:clamp(1.2rem,1rem + 1.6vw,1.7rem)}
+  .logo-sub{font-size:11px}
+  .live-badge,.refresh-btn,.theme-toggle{min-height:40px}
+  .refresh-btn{padding:0.55rem 0.75rem}
+  .theme-toggle{width:40px;height:40px}
+  .columns-header{grid-template-columns:minmax(0,1fr) minmax(0,1fr);position:static}
+  .col-head{padding:var(--space-3);align-items:flex-start;flex-direction:column;min-width:0;min-height:auto}
+  .col-head.right-head{border-right:none;border-left:1px solid var(--color-border);border-bottom:1px solid var(--color-border)}
+  .col-head.left-head{border-bottom:1px solid var(--color-border)}
   .col-sources{margin-left:0;margin-top:var(--space-2)}
-  .main-split{grid-template-columns:1fr;height:auto;min-height:auto;overflow:visible}
-  .news-col{padding:var(--space-4);border-right:none;border-bottom:1px solid var(--color-border);height:auto;max-height:none;overflow:visible}
-  .main-split::before{display:none}
+  .source-chip{font-size:11px;padding:2px 6px}
+  .main-split{grid-template-columns:minmax(0,1fr) minmax(0,1fr);height:auto;min-height:auto;overflow:visible}
+  .news-col{padding:var(--space-3);height:auto;max-height:none;overflow:visible;min-width:0}
+  .news-col.left-col{border-right:1px solid var(--color-border)}
+  .news-col.right-col{border-right:none;border-left:none}
+  .main-split::before{display:block;top:0}
   .topic-filters{overflow-x:auto;flex-wrap:nowrap;padding-bottom:var(--space-2);scrollbar-width:none}
   .topic-filters::-webkit-scrollbar{display:none}
-  .topic-btn{white-space:nowrap;min-height:44px;padding:0.65rem 0.95rem}
-  .news-card{margin-bottom:var(--space-3)}
-  .news-card.featured{margin-bottom:var(--space-4)}
-  .card-content{padding:var(--space-4)}
-  .card-footer{padding:var(--space-3) var(--space-4);gap:var(--space-2);align-items:flex-start;flex-direction:column}
-  .read-more{min-height:44px;display:inline-flex;align-items:center}
-  .card-title{font-size:1.05rem}
-  .news-card.featured .card-title{font-size:1.22rem}
+  .topic-btn{white-space:nowrap;min-height:38px;padding:0.45rem 0.7rem;font-size:12px}
+  .news-card{margin-bottom:var(--space-3);border-radius:12px}
+  .news-card.featured{margin-bottom:var(--space-3)}
+  .card-content{padding:var(--space-3)}
+  .card-footer{padding:var(--space-2) var(--space-3);gap:var(--space-2);align-items:flex-start;flex-direction:column}
+  .read-more{min-height:36px;display:inline-flex;align-items:center;font-size:11px}
+  .card-title{font-size:0.93rem;line-height:1.25}
+  .news-card.featured .card-title{font-size:1rem}
+  .card-snippet{font-size:12px;-webkit-line-clamp:2}
+  .card-source,.card-time{font-size:11px}
+  .section-label{font-size:11px;margin-bottom:var(--space-3)}
+  .card-image{aspect-ratio:4/3}
 }
 
 @media(max-width:420px){
   .header-left{align-items:flex-start}
   .last-updated{width:100%}
-  .col-head{padding:var(--space-3)}
-  .news-col{padding:var(--space-3)}
-  .card-source,.card-time{font-size:12px}
-  .card-snippet{font-size:14px}
+  .col-head{padding:var(--space-2)}
+  .news-col{padding:var(--space-2)}
+  .topic-btn{padding:0.4rem 0.55rem;font-size:11px}
+  .card-title{font-size:0.86rem}
+  .news-card.featured .card-title{font-size:0.92rem}
+  .card-snippet{font-size:11px}
+  .source-chip{font-size:10px}
 }
 </style>
 </head>
